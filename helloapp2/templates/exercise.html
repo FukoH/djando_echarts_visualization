@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Echarts Demo</title>
+    {% load static %}
+    <script type="text/javascript" src="{% static 'my_app/echarts.js' %}"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
+</head>
+<body>
+<div id="main" style="width: 600px;height:400px;"></div>
+<script type="text/javascript">
+        var myChart = echarts.init(document.getElementById('main'));
+        var data = [];
+        var point = [];
+		$(document).ready(function(){
+         $.getJSON("./face_data",function(response){
+                var name = response.name
+                var face = response.face
+                for (var i = 0;i<Object.keys(name).length;i++){
+                    data.push(name[i]);
+                }
+
+                for (var i = 0;i<Object.keys(face).length;i++){
+                    point.push(face[i]);
+                }
+
+          var option = {
+            title: {
+                text: '小demo'
+            },
+            tooltip: {},
+            legend: {
+                data:['颜值']
+            },
+            xAxis: {
+                data:data
+            },
+            yAxis: {},
+            series: [{
+                name: '颜值',
+                type: 'bar',
+                data: point
+            }]
+        };
+
+        myChart.setOption(option);
+
+            });
+        });
+
+
+</script>
+
+</body>
+</html>
