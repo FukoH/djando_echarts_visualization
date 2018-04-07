@@ -12,7 +12,7 @@ def face(request):
 
 def face_data(request):
     df = pd.read_csv('static/my_app/face.csv',encoding='gbk')
-    json = df.to_json(force_ascii=False)
+    json = df.to_json(force_ascii=False,orient='index')
     # di = df.to_dict()
     #json = json.decode('gbk').encode('utf-8')
     return HttpResponse(json)
