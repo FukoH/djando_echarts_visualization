@@ -10,12 +10,13 @@
 <div id="main" style="width: 600px;height:400px;"></div>
 <script type="text/javascript">
 fetch("./face_data").
-    then((resp) => resp.json()).
+    then((resps) => resps.json()).
     then(function(resps) {
         const myChart = echarts.init(document.getElementById('main'));
         const data = [];
         const point = [];
-        for (let i = 0;i<4;i++){
+        const keys = Object.keys(resps);
+        for (let i of keys){
             data.push(resps[i].name);
             point.push(resps[i].face);
         }
